@@ -1,0 +1,24 @@
+{
+  "name": "smtivscrapper",
+  "version": "1.0.0",
+  "description": "A web scrapper to scrape data from a smt iv related website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smtiv",
+    "shin",
+    "megami",
+    "tensei",
+    "smt",
+    "webscrap",
+    "scrapping"
+  ],
+  "author": "gughog",
+  "license": "ISC",
+  "dependencies": {
+    "clr-js": "^1.0.0",
+    "puppeteer": "^2.1.1"
+  }
+}
