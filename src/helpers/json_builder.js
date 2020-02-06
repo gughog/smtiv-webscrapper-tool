@@ -1,3 +1,4 @@
+const fs = require('fs');
 const clr = require('clr-js');
 const OUTPUT_PATH = '../data/';
 
