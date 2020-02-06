@@ -17,15 +17,14 @@ const TABLE_INFO = Object.freeze({
  */
 const main = async () => {
   console.log(clr.bold('=== SMTIV Tool ===').red().it());
-  
+  // 1. Open a new browser:
+  console.log('>>> Opening a browser instance...')
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox'],
+    headless: true
+  })
   try {
     // All logics here:
-    // 1. Open a new browser:
-    console.log('>>> Opening a browser instance...')
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox'],
-      headless: true
-    })
 
     // 2. Open up a new page:
     console.log('>>> Opening a new page...')
@@ -35,17 +34,24 @@ const main = async () => {
     await page.goto(URL);
 
     // 4. Wait for get all data button press:
-    console.log('>>> Pressing the button')
+    console.log('>>> Pressing the button...')
     await page.click(SHOW_ALL_BTN);
+
+    // 5. Fetch all table data:
+    console.log('>>> Fetching table info...')
+    // For testings, it only fetches names:
+    const table_data = await page.$$eval('.demonLink', (table) => {
+      return table.map(creature => creature.innerHTML)
+    });
+    console.log(table_data);
 
 
   } catch (error) {
-    // errors
+    throw new Error(error);
   } finally {
+    console.log('>>> Closing the app...')
     await browser.close();
   }
-
-
 };
 
 main();
