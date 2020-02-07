@@ -1,3 +1,5 @@
+"use strict";
+
 // Constants
 const URL = 'https://erikku.github.io/smt4tool/';
 const SHOW_ALL_BTN = '#showAllDemonsBtn';

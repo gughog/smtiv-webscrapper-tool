@@ -1,3 +1,5 @@
+"use strict";
+
 // Imports
 const puppeteer = require('puppeteer');
 const clr = require('clr-js');

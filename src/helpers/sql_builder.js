@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require('fs');
 const clr = require('clr-js');
 const OUTPUT_PATH = 'src/data/';
