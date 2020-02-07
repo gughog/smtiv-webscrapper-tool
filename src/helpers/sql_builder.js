@@ -9,19 +9,27 @@ const OUTPUT_PATH = 'src/data/';
  * is no problem here for concatenating strings, because it will not
  * execute the script for queries, it only creates the raw script.
  *
- * @param {String} filename - Optional file name. Default: 'sql_script';
- * @param {String} tablename - Name of the table that script will insert into;
- * @param {Array} params_array - All related data array of objects that will be used to mount sql script.
+ * @param {Object} params - Object with all paramenters to build the sql file. 
+ * @param {String} params.filename - Optional file name. Default: 'sql_script';
+ * @param {String} params.tablename - Name of the table that script will insert into;
+ * @param {Array} params.params_array - All related data array of objects that will be used to mount sql script.
+ * @param {Array} params.fields - The field column names that will be inserted on.
  */
-const sql_builder = async (filename = 'sql_script', tablename, params_array) => {
+const sql_builder = async (params) => {
+  const {
+    filename = `sqlfile_${Math.floor(Math.random()) * 100}.sql`,
+    tablename,
+    params_array,
+    fields
+  } = params;
 
   let final_sql =
 `INSERT INTO ${tablename}
-  ( lv, name, hp, mp, st, dx, ma, ag, lu, phys, gun, fire, ice, elec, force, light, dark )
+  ( ${fields.map(field => field)} )
 VALUES
-  ${ params_array.map(item => {
-    return `("${item["lv"]}", "${item["name"]}", "${item["hp"]}", "${item["mp"]}", "${item["st"]}", "${item["dx"]}", "${item["ma"]}", "${item["ag"]}", "${item["lu"]}", "${item["phys"]}", "${item["gun"]}", "${item["fire"]}", "${item["ice"]}", "${item["elec"]}", "${item["force"]}", "${item["light"]}", "${item["dark"]}")\n`
-  }) };`.trim();
+  ${params_array.map((item, index) => {
+    return `(${fields.map( field => `"${item[field]}"` )})${(index + 1) === params_array.length ? '' : ',\n'}`
+  }).join('')};`
 
   fs.writeFile(`${OUTPUT_PATH}${filename}.sql`, final_sql, 'utf-8', (err) => {
     if (err) {
@@ -29,17 +37,12 @@ VALUES
       throw err;
     }
 
-    console.log(clr.green('File created.').bold().it())
+    console.log(
+      clr.green(`✔ File ${clr.bold(filename + '.sql').cyan().it()} was created at: ${OUTPUT_PATH}${filename}.sql`)
+         .bold()
+         .it()
+    );
   })
-
-  // return is needed ?
-  // return final_sql;
 };
-
-// Example usage
-// sql_builder('mysql', 'tablename01', {
-//   indexes: indexes,
-//   names: names
-// });
 
 module.exports = sql_builder;
