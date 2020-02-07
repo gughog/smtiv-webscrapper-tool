@@ -19,7 +19,7 @@ const json_builder = async (filename = 'db', params_array) => {
     }
 
     console.log(
-      clr.green(`✔ File was created at: ${OUTPUT_PATH}${filename}.json`)
+      clr.green(`✔ File ${clr.bold(filename + '.json').cyan().it()} was created at: ${OUTPUT_PATH}${filename}.json`)
          .bold()
          .it()
     );
