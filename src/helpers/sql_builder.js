@@ -29,7 +29,7 @@ const sql_builder = async (params) => {
   ( ${fields.map(field => field)} )
 VALUES
   ${params_array.map((item, index) => {
-    return `(${fields.map( field => `"${preventUnexpecteds(item[field])}"` )})${(index + 1) === params_array.length ? '' : ',\n'}`
+    return `(${fields.map( field => !isNaN(item[field]) ? `${preventUnexpecteds(item[field])}` : `'${preventUnexpecteds(item[field])}'` )})${(index + 1) === params_array.length ? '' : ',\n'}`
   }).join('')};`
 
   fs.writeFile(`${OUTPUT_PATH}${filename}.sql`, final_sql, 'utf-8', (err) => {

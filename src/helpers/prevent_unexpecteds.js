@@ -3,7 +3,9 @@
  * @param {String} item - String to handle.
  */
 const preventUnexpecteds = (item) => {
-  const replaced = item.replace(/\r?\n|\r/g, '').replace(/"/g, "'");
+  const replaced = item.replace(/\r?\n|\r/g, '')
+                       .trim()
+                       .replace(/'/g, '"')
   return replaced;
 };
 
