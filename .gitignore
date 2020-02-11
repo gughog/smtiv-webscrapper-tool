@@ -1,2 +1,4 @@
 node_modules/
 examples/
+src/data/*.json
+src/data/*.sql

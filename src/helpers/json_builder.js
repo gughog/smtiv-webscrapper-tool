@@ -24,9 +24,6 @@ const json_builder = async (filename = 'db', params_array) => {
          .it()
     );
   });
-
-  // Return will be needed ?
-  // return final_json;
 };
 
 module.exports = json_builder;
