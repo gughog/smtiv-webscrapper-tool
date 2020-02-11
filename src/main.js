@@ -153,7 +153,7 @@ const main = async (puppeteer, clr) => {
           ingredient02: array_with_rows[3],
           ingredient03: array_with_rows[4],
           ingredient04: array_with_rows[5],
-          unlock_requirements: array_with_rows[6]
+          unlock_requirements: array_with_rows[6] || ' - '
         };
       }));
     });
