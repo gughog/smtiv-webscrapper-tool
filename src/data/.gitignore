@@ -1,0 +1,4 @@
+# In this directory will go the .JSON and .SQL outputs generated.
+*
+# This file will go to prevent git to remove this directory.
+!.gitignore
