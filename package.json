@@ -18,7 +18,7 @@
   "author": "gughog",
   "license": "ISC",
   "dependencies": {
-    "clr-js": "^1.0.0",
+    "clr-js": "1.0.0",
     "dotenv": "^8.2.0",
     "puppeteer": "^2.1.1"
   }
